@@ -7,7 +7,12 @@
         </div>
         <div class="media-body">
             <div>
-                {!! link_to_route('users.show', $user->name, ['id' => $user->id]) !!} <span class="text-muted">posted at {{ $micropost->created_at }}</span>
+                @if (Auth::user()->is_favoriting($micropost->id))
+                    {!! link_to_route('users.show', $user->name, ['id' => $user->id]) !!} <span class="text-muted">posted at {{ $micropost->created_at }}</span>
+                    <span class="glyphicon glyphicon-star-empty"></span>
+                @else
+                    {!! link_to_route('users.show', $user->name, ['id' => $user->id]) !!} <span class="text-muted">posted at {{ $micropost->created_at }}</span>
+                @endif
             </div>
             <div>
                 <p>{!! nl2br(e($micropost->content)) !!}</p>
@@ -18,6 +23,7 @@
                         {!! Form::submit('Delete', ['class' => 'btn btn-danger btn-xs']) !!}
                     {!! Form::close() !!}
                 @endif
+                @include('favorite.favorite_button', ['micropost' => $micropost])
             </div>
         </div>
     </li>
