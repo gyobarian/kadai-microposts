@@ -13,9 +13,14 @@
             </div>
         </aside>
         <div class="col-xs-8">
-            @if (count($microposts) > 0)
-                @include('microposts.microposts', ['microposts' => $microposts])
-            @endif
+            <div class="panel-heading">
+                <h3 class="panel-title">Favorites</h3>
+            </div>
+            <div class="panel-body">
+                @if (count($microposts) > 0)
+                    @include('microposts.microposts', ['microposts' => $microposts])
+                @endif
+            </div>
         </div>
     </div>
 @endsection

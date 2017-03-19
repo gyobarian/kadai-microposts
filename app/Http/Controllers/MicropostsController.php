@@ -103,15 +103,15 @@ class MicropostsController extends Controller
     
     public function favoritings($id)
     {
-        $user = User::find($id);
-        $favoritings = $user->favorites()->paginate(10);
+        $user = \Auth::user();
+        $microposts = $user->favorit_posts()->paginate(10);
         
         $data = [
             'user' => $user,
-            'favoritings' => $favoritings,
+            'microposts' => $microposts,
         ];
         
-        return view('microposts.favoritings', $data);
+        return view('microposts.microposts_favoritings', $data);
     }
     
 }
